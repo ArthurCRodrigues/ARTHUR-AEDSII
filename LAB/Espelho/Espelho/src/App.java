@@ -3,7 +3,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        while (sc)
+        while (sc.hasNext()) {
         int num1 = sc.nextInt();
         int num2 = sc.nextInt();
         int dif = num2 - num1;
@@ -12,11 +12,14 @@ public class App {
         }
         for (int i = 0 ; i <= dif; i++) {
             int num = num2-i;
+
+            for (int j = 0 ; num >= 10; num/=10) {
+                System.out.print(num%10);
+
+            }
             System.out.print(num%10);
-            if (num >= 10) System.out.print(num/10);
-
-            
         }
-
+        System.out.println();
+    }
     }
 }
