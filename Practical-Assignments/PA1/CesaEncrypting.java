@@ -15,11 +15,15 @@ public class CesaEncrypting {
       for (int i = 0; i < wrd.length(); i++) {
          char x = wrd.charAt(i);
 
-         if (Character.isLetter(x) || Character.isDigit(x)) {
+         if (x == ' ') { 
+            newString += '#'; 
+         } else if (x == '-') { 
+            newString += '0'; 
+         } else if (Character.isLetter(x) || Character.isDigit(x)) {
             int code = getCode(x);
             newString += getChar(code + 3);
          } else {
-            newString += x; // Keep special characters unchanged
+            newString += x; 
          }
       }
       return newString;
