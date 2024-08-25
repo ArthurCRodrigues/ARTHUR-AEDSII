@@ -21,17 +21,20 @@ int palindromeRecursive( char *word) {
 }
 
 
-int main ( void ) { 
+int main (void) { 
     char str[255];
 
-    while (strcmp(str,"FIM\n") != 0) {
-        fgets(str,sizeof(str),stdin);
+    fgets(str, sizeof(str), stdin);
+
+    while (strcmp(str, "FIM\n") != 0) {
         if (palindromeRecursive(str) == 0) {
             printf("SIM\n");
-        }
-        else {
+        } else {
             printf("NAO\n");
         }
+
+        fgets(str, sizeof(str), stdin);
     }
-    
+
+    return 0;
 }
