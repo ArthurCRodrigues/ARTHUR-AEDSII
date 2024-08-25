@@ -1,7 +1,4 @@
 import java.util.*;
-
-
-
 public class randomSwitch {
     public static String Switch(String wrd) {
         Random gerador = new Random();

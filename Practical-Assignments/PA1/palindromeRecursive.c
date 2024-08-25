@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
-
-
 int palRec(char *word , int tail) {
     int length = strlen(word) - 1;
     int indx = length - tail;

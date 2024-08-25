@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class palindrome {
     
     public static int isPalindrome(String wrd) {
