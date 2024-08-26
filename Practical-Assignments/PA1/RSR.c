@@ -17,7 +17,7 @@ void randomSwitch(char *wrd, char char1, char char2, int index) {
     if (wrd[index] == char1) {
         wrd[index] = char2;
     }
-
+    printf("\nCHAR1 -> %c\nCHAR2 -> %c \n",char1,char2);
 
     randomSwitch(wrd, char1, char2, index + 1);
 }
@@ -26,7 +26,7 @@ int main() {
     srand(4); 
     
     char wrd[100];
-    scanf("%s", wrd);
+    fgets(wrd,sizeof(wrd),stdin);
 
     while (strcmp(wrd, "FIM") != 0) {
         char char1 = getRandomChar();
@@ -40,9 +40,9 @@ int main() {
 
         randomSwitch(wrd, char1, char2, 0);
 
-        printf("%s\n", wrd);
+        printf("%s", wrd);
 
-        scanf("%s", wrd);
+        fgets(wrd,sizeof(wrd),stdin);
     }
 
     return 0;
