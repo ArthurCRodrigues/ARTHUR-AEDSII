@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class RPJ {
+public class recursivePalindrome {
     private static int isPalindromePrivate(String word,int head, int tail) {
 
         if (head >= tail) {
