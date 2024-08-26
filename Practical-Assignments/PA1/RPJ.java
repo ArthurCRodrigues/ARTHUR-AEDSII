@@ -1,34 +1,23 @@
 import java.util.Scanner;
 public class RPJ {
     private static int isPalindromePrivate(String word,int head, int tail) {
-        int len = word.length();
-        int cmp = len - tail;
-        System.out.println("HEAD -> "+head);
-        System.out.println("CMP -> "+cmp);
 
-        if (head == cmp) {
+        if (head >= tail) {
             return 0;
         } 
-        if (word.charAt(head) != word.charAt(cmp)) {
+        if (word.charAt(head) != word.charAt(tail)) {
             return 1;
         }
         else {
-            return isPalindromePrivate(word,head + 1, tail + 1);
+            return isPalindromePrivate(word,head + 1, tail - 1);
         }
 
     }
     public static void isPalindrome(String word) {
-        if (isPalindromePrivate(word, 0, 1) == 0) {
+        if (isPalindromePrivate(word, 0, word.length()-1) == 0) { // Pass the correct indices for the entire word
             System.out.println("SIM");
-            return;
-        }
-        if (isPalindromePrivate(word, 0, 1) == 1) {
+        } else {
             System.out.println("NAO");
-            return;
-        }
-        else {
-            System.out.println("Unknown Error");
-            return;
         }
     }
     public static void main(String[] args) {
