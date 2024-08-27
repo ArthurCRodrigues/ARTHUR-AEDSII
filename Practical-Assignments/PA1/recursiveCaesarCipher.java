@@ -3,7 +3,7 @@ public class recursiveCaesarCipher {
 
    private static String encrypt(String input, String newString,int index,int len) {
         if (index == len) {
-            return newString;
+            return newString; //Caso base, testa se o índice atual já é igual ao tamanho da string. 
         }
         char x = input.charAt(index);
            
@@ -11,7 +11,7 @@ public class recursiveCaesarCipher {
            
         newString += ch; // Adiciona o novo caractere à String
 
-        return encrypt(input, newString, index+1, len);
+        return encrypt(input, newString, index+1, len); //Chamada recursiva com índice do próximo elemento da String (input[i+1])
    }
 
    public static String encrypt(String input) {
