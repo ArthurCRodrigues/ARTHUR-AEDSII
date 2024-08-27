@@ -13,7 +13,10 @@ public class ParenthesisCheck {
         int closing = 0;
         for (int i = 0 ; i < expression.length(); i++) {
             if (isOpeningParenthesis(expression.charAt(i))) opening++;
-            else if (isClosingParenthesis(expression.charAt(i))) closing++;
+            else if (isClosingParenthesis(expression.charAt(i))) {
+                if (opening == 0) return false;
+                else closing++;
+            }
         }
         return opening == closing;
     } 
