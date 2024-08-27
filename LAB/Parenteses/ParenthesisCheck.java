@@ -8,7 +8,7 @@ public class ParenthesisCheck {
     private static boolean isClosingParenthesis(char ch) {
         return ch == ')' ;
     }
-    public static boolean  ParenthesisCheck(String expression) {
+    public static boolean  parenthesisCheck(String expression) {
         int opening = 0;
         int closing = 0;
         for (int i = 0 ; i < expression.length(); i++) {
@@ -22,7 +22,7 @@ public class ParenthesisCheck {
 
         String wrd = sc.nextLine();
         while (!wrd.equals("FIM")) {
-            if (ParenthesisCheck(wrd)) System.out.println("correto");
+            if (parenthesisCheck(wrd)) System.out.println("correto");
             else System.out.println("incorreto");
             wrd = sc.nextLine(); 
         }
