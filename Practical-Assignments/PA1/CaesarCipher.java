@@ -1,6 +1,5 @@
 public class CaesarCipher {
 
-
     public static String encrypt(String input) {
         String encrypted = ""; //Cria a nova String a qual os caracteres criptografados serão adicionados
 
@@ -9,7 +8,7 @@ public class CaesarCipher {
             
             char ch = (char) (x + 3); // Adiciona o caractere criptografado à uma nova variavel
             
-            encrypted += ch; // Adiciona o novo caractere à String
+            encrypted += ch; // Adiciona o novo caractere (criptografado) à String
         }
 
         return encrypted;
