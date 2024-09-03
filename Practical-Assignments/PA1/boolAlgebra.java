@@ -1,5 +1,1 @@
-public class boolAlgebra {
-    public static void main(String[] args) {
-        // Your code here
-    }
-}
+// Boolean Algebra algorithm here
