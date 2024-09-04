@@ -1,28 +1,46 @@
+
+
 public class SelectionSort {
-    public static void SeleSort(int arr[]) {
-        int n = arr.length;
-        for (int i = 0 ; i < (n-1); i++ ) {
-                int smallest = i;
-                for (int j = i+1 ; j < n; j++) {
-                    if (arr[smallest] > arr[j]) {
-                        smallest = j;
-                    }
+    public static int[] Sort(int arr[]) {
+        for (int i = 1; i < arr.length; i++) {
+            int temp = arr[i];
+            int j = i - 1;
+            
+            System.out.println("\nCurrent element: " + temp);
+            System.out.println("Comparing with elements at indices: ");
+            
+            while ((j >= 0) && (arr[j] > temp)) {
+                System.out.println(j + " and " + (j + 1));
+                
+                arr[j + 1] = arr[j];
+                j--;
+                
+                System.out.println("Array after modification:");
+                for (int num : arr) {
+                    System.out.print(num + " ");
                 }
-                int temp = arr[smallest];
-                arr[smallest] = arr[i];
-                arr[i] = temp;
+                System.out.println();
+            }
+            
+            System.out.println("Moving " + temp + " to index " + (j + 1));
+            arr[j + 1] = temp;
         }
+        return arr;
     }
+
     public static void main(String[] args) {
-        int[] arr = {10,9,3,1,7,4,2,6,5,8};
-        System.out.println("Array before sorting: ");
-        for (int num : arr) {
-            System.out.printf("%d\t",num);
+        int[] unsortedArray = {5, 2, 9, 1, 3};
+        
+        System.out.println("\nUnsorted Array:");
+        for (int num : unsortedArray) {
+            System.out.print(num + " ");
         }
-        SeleSort(arr);
-        System.out.println("\nArray after sorting: ");
-        for (int num : arr) {
-            System.out.printf("%d\t",num);
+        
+        int[] sortedArray = Sort(unsortedArray);
+        
+        System.out.println("\nSorted Array:\n");
+        for (int num : sortedArray) {
+            System.out.print(num + " ");
         }
     }
 }
