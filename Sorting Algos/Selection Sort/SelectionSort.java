@@ -2,34 +2,20 @@
 
 public class SelectionSort {
     public static int[] Sort(int arr[]) {
+        // Sorting algorithm using Selection Sort
         for (int i = 1; i < arr.length; i++) {
-            int temp = arr[i];
-            int j = i - 1;
+            int temp = arr[i]; // Store the current element
+            int j = i - 1; // Initialize the index of the previous element
             
-            System.out.println("\nCurrent element: " + temp);
-            System.out.println("Comparing with elements at indices: ");
-            
+            // Compare the current element with elements at indices
             while ((j >= 0) && (arr[j] > temp)) {
-                System.out.println(j + " and " + (j + 1));
-                
-                arr[j + 1] = arr[j];
-                j--;
-                
-                System.out.println("Array after modification:");
-                for (int num : arr) {
-                    System.out.print(num + " ");
-                }
-                System.out.println();
+                arr[j + 1] = arr[j]; // Shift elements to the right
+                j--; // Move to the previous element
             }
             
-            System.out.println("Moving " + temp + " to index " + (j + 1));
-            arr[j + 1] = temp;
+            arr[j + 1] = temp; // Insert the current element at the correct position
         }
-        return arr;
-    }
-
-    public static void main(String[] args) {
-        int[] unsortedArray = {5, 2, 9, 1, 3};
+        return arr; // Return the sorted array    int[] unsortedArray = {5, 2, 9, 1, 3};
         
         System.out.println("\nUnsorted Array:");
         for (int num : unsortedArray) {
