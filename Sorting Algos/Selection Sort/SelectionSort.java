@@ -15,16 +15,19 @@ public class SelectionSort {
             
             arr[j + 1] = temp; // Insert the current element at the correct position
         }
-        return arr; // Return the sorted array    int[] unsortedArray = {5, 2, 9, 1, 3};
-        
-        System.out.println("\nUnsorted Array:");
+        return arr; // Return the sorted array    
+    }
+    
+    public static void main(String[] args) {
+        int[] unsortedArray = {5, 2, 9, 1, 3};
+        System.out.println("Unsorted Array:");
         for (int num : unsortedArray) {
             System.out.print(num + " ");
         }
         
         int[] sortedArray = Sort(unsortedArray);
         
-        System.out.println("\nSorted Array:\n");
+        System.out.println("\nSorted Array:");
         for (int num : sortedArray) {
             System.out.print(num + " ");
         }
