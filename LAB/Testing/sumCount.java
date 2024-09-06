@@ -20,7 +20,7 @@ public class sumCount {
     }
     
     public static void main(String[] args) {
-        System.out.println(calcula(5));
+        System.out.println(calcula(10));
     }
     
 }
