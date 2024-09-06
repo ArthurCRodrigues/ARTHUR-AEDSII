@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-public class RandomAccessFileExample {
+public class Arquivo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
