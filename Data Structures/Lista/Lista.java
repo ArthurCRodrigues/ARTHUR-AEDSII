@@ -28,6 +28,50 @@ public class Lista {
 
     }
 
+    public void append(int x) throws Exception {
+        if (n >= array.length) {
+            throw new Exception("Error! Array index out of bounds");
+        }
+        array[n] = x;
+        n++;
+    }
+
+    public void insert(int x , int pos) throws Exception {
+        if (n >= array.length) {
+            throw new Exception("Error! Array index out of bounds");
+        }
+        for (int i = n ; i > n; i--) {
+            array[i] = array[i -1];
+        }
+
+
+        array[pos] = x;
+        n++;
+
+    }
+
+    public int removeStart() throws Exception {
+        if (n == 0) {
+            throw new Exception("Error! Array is empty");
+        }
+        int resp = array[0];
+        n--;
+        for (int i = 0 ; i < n ; i++) {
+            array[i] = array[i+1];
+        }
+
+        return resp;
+    }
+
+    public int pop() throws Exception {
+        if (n == 0) {
+            throw new Exception("Error! Array is empty");
+        }
+        
+        return array[--n];
+
+    }
+
 
 
 }
