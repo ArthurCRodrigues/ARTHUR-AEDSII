@@ -1,20 +1,30 @@
 public class partialInsertionSort {
-    public static void insertionSortK(int[] arr, int k) {
-        for (int i = 1 ; i < k; i++) {
-            int temp = arr[i];
+    public static void partialInsertionSort(int[] arr, int k) {
+        for (int i = 1; i < arr.length; i++) {
+            int key = arr[i];
             int j = i - 1;
-            while (j >= 0 && arr[j] > temp) {
-                arr[j+1] = arr[j];
+            
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
                 j--;
             }
-            arr[j+1] = temp;
+            
+            arr[j + 1] = key;
+            
+            if (i == k) {
+                break;
+            }
         }
     }
+    
     public static void main(String[] args) {
-        int[] arr = {3,2,1,2,1,8,7,6};
-        insertionSortK(arr, 3);
-        for (int item : arr) {
-            System.out.print(item+"\t");
+        int[] arr = {5, 2, 7, 3, 4, 1, 6};
+        int k = 3;
+        
+        partialInsertionSort(arr, k);
+        
+        for (int num : arr) {
+            System.out.print(num + " ");
         }
     }
 }
