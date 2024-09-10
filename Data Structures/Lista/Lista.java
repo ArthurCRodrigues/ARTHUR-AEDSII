@@ -72,6 +72,18 @@ public class Lista {
 
     }
 
+    public int remove(int pos) throws Exception {
+        if (n == 0) {
+            throw new Exception("Error! Array is empty");
+        }
+        int resp = array[pos];
+        
+        for (int i = n; i > pos; i--) {
+            array[i] = array[i-1];
+        }
+        
+    }
+
 
 
 }
