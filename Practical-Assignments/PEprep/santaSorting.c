@@ -5,19 +5,12 @@ int main(void) {
     char str[100][100];
     char temp[100];
     int n;
-<<<<<<< HEAD
-    scanf("%d",&n);
-    for (int i = 0 ; i < n ; i++) {
-        printf("input str");
-        scanf("%s",&str[i]);
-=======
     scanf("%d", &n);
     while (getchar() != '\n');  
 
     for (int i = 0; i < n; i++) {
         fgets(str[i], sizeof(str[i]), stdin);
         str[i][strcspn(str[i], "\n")] = 0;  
->>>>>>> 6333eca18f992e9e55f7a09958fc4796d5b63d75
     }
 
     int well = 0;
@@ -25,12 +18,6 @@ int main(void) {
         if (str[i][0] == '+') {
             well++;
         }
-<<<<<<< HEAD
-
-    }
-    printf("%d",well);
-}
-=======
     }
 
     for (int i = 0; i < n - 1; i++) {
@@ -54,4 +41,3 @@ int main(void) {
 
     return 0;
 }
->>>>>>> 6333eca18f992e9e55f7a09958fc4796d5b63d75
