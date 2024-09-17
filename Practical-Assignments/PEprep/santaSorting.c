@@ -7,6 +7,7 @@ int main ( void ) {
     int n;
     scanf("%d",&n);
     for (int i = 0 ; i < n ; i++) {
+        printf("input str");
         scanf("%s",&str[i]);
     }
     int well = 0;
@@ -14,6 +15,7 @@ int main ( void ) {
         if (str[i][0] == '+') {
             well++;
         }
-        
+
     }
+    printf("%d",well);
 }
