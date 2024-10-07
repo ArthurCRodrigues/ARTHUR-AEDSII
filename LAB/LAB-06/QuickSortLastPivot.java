@@ -1,4 +1,3 @@
-package LAB.LAB-06;
 
 public class QuickSortLastPivot {
 

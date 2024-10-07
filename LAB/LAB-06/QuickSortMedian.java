@@ -41,4 +41,20 @@ public class QuickSortMedian {
         array[i] = array[j];
         array[j] = temp;
     }
+    public static void main(String[] args) {
+        int[] array = {34, 7, 23, 32, 5, 62};
+        System.out.println("Unsorted array:");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        quickSort(array, 0, array.length - 1);
+
+        System.out.println("Sorted array:");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
 }
