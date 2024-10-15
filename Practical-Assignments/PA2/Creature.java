@@ -50,22 +50,55 @@ class Creature {
         this.captureProbability = 0;
         this.legendaryStatus = false;
         this.dateCaptured = new Date();
-    }
-    public static void selectionSortByName(List<Creature> creatures) {
-        int n = creatures.size();
-        for (int i = 0; i < n - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++) {
-                if (creatures.get(j).getCreatureName().compareTo(creatures.get(minIndex).getCreatureName()) < 0) {
-                    minIndex = j;
-                }
-            }
-            Creature temp = creatures.get(minIndex);
-            creatures.set(minIndex, creatures.get(i));
-            creatures.set(i, temp);
         }
-    }
-    public int getId() { return id; }
+
+        public static void heapSortByName(List<Creature> creatures) {
+        int n = creatures.size();
+
+        // Build heap (rearrange array)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(creatures, n, i);
+        }
+
+        // One by one extract an element from heap
+        for (int i = n - 1; i > 0; i--) {
+            // Move current root to end
+            Creature temp = creatures.get(0);
+            creatures.set(0, creatures.get(i));
+            creatures.set(i, temp);
+
+            // call max heapify on the reduced heap
+            heapify(creatures, i, 0);
+        }
+        }
+
+        private static void heapify(List<Creature> creatures, int n, int i) {
+        int largest = i; // Initialize largest as root
+        int left = 2 * i + 1; // left = 2*i + 1
+        int right = 2 * i + 2; // right = 2*i + 2
+
+        // If left child is larger than root
+        if (left < n && creatures.get(left).getCreatureName().compareTo(creatures.get(largest).getCreatureName()) > 0) {
+            largest = left;
+        }
+
+        // If right child is larger than largest so far
+        if (right < n && creatures.get(right).getCreatureName().compareTo(creatures.get(largest).getCreatureName()) > 0) {
+            largest = right;
+        }
+
+        // If largest is not root
+        if (largest != i) {
+            Creature swap = creatures.get(i);
+            creatures.set(i, creatures.get(largest));
+            creatures.set(largest, swap);
+
+            // Recursively heapify the affected sub-tree
+            heapify(creatures, n, largest);
+        }
+        }
+
+        public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
     public int getGen() { return gen; }
@@ -201,7 +234,7 @@ class Creature {
                     }
                 }
             }
-            selectionSortByName(inputCreatures);
+            heapSortByName(inputCreatures);
             for ( Creature c : inputCreatures) {
                 c.printCreatureData();
             }
