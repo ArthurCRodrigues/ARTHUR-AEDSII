@@ -146,7 +146,6 @@ class Creature {
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         List<Creature> creatures = new ArrayList<>();
-        
 
         try {
             File file = new File("/tmp/pokemon.csv");
