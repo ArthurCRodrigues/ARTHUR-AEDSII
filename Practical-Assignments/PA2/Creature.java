@@ -51,7 +51,20 @@ class Creature {
         this.legendaryStatus = false;
         this.dateCaptured = new Date();
     }
-
+    public static void selectionSortByName(List<Creature> creatures) {
+        int n = creatures.size();
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (creatures.get(j).getCreatureName().compareTo(creatures.get(minIndex).getCreatureName()) < 0) {
+                    minIndex = j;
+                }
+            }
+            Creature temp = creatures.get(minIndex);
+            creatures.set(minIndex, creatures.get(i));
+            creatures.set(i, temp);
+        }
+    }
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
@@ -144,65 +157,54 @@ class Creature {
     }
 
     public static void main(String[] args) {
-        Scanner inputScanner = new Scanner(System.in);
-        List<Creature> creatures = new ArrayList<>();
+        try (Scanner inputScanner = new Scanner(System.in)) {
+            List<Creature> creatures = new ArrayList<>();
+            List<Creature> inputCreatures = new ArrayList<>();
+            try (Scanner fileScanner = new Scanner(new File("/tmp/pokemon.csv"))) {
 
-        try {
-            File file = new File("/tmp/pokemon.csv");
-            Scanner fileScanner = new Scanner(file);
-
-            if (fileScanner.hasNextLine()) {
-                fileScanner.nextLine();
-            }
-
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                if (line.equals("FIM")) {
-                    break;
+                if (fileScanner.hasNextLine()) {
+                    fileScanner.nextLine();
                 }
 
-                Creature creature = new Creature();
-                creature.readCreatureData(line);
-                creatures.add(creature);
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    if (line.equals("FIM")) {
+                        break;
+                    }
+
+                    Creature creature = new Creature();
+                    creature.readCreatureData(line);
+                    creatures.add(creature);
+                }
+            } catch (FileNotFoundException | ParseException e) {
+                e.printStackTrace();
             }
 
-            fileScanner.close();
-        } catch (FileNotFoundException | ParseException e) {
-            e.printStackTrace();
-        }
+            boolean firstPart = true;
+            boolean secondPart = false;
 
-        while (true) {
-            if (inputScanner.hasNext()) {
-                String input = inputScanner.next();
+            while (firstPart) {
+                if (inputScanner.hasNext()) {
+                    String input = inputScanner.next();
 
-                if (input.equalsIgnoreCase("FIM")) {
-                    break;
-                }
+                    if (input.equalsIgnoreCase("FIM")) {
+                        firstPart = false;
+                        secondPart = true;
+                        break;
+                    }
 
-                try {
-                    int searchedId = Integer.parseInt(input);
-                    boolean creatureFound = false;
-
+                    int inputID = Integer.parseInt(input);
                     for (Creature c : creatures) {
-                        if (c.getId() == searchedId) {
-                            c.printCreatureData();
-                            creatureFound = true;
-                            break;
+                        if (c.getId() == inputID) {
+                            inputCreatures.add(c);
                         }
                     }
-
-                    if (!creatureFound) {
-                        System.out.println("Creature with ID " + searchedId + " not found.");
-                    }
-
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + input + ". Please enter an integer.");
                 }
-            } else {
-                break;
+            }
+            selectionSortByName(inputCreatures);
+            for ( Creature c : inputCreatures) {
+                c.printCreatureData();
             }
         }
-
-        inputScanner.close();
     }
 }
