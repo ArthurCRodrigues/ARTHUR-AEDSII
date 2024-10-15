@@ -52,192 +52,148 @@ class Creature {
         this.dateCaptured = new Date();
         }
 
-        public static void heapSortByName(List<Creature> creatures) {
-        int n = creatures.size();
-
-        // Build heap (rearrange array)
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(creatures, n, i);
-        }
-
-        // One by one extract an element from heap
-        for (int i = n - 1; i > 0; i--) {
-            // Move current root to end
-            Creature temp = creatures.get(0);
-            creatures.set(0, creatures.get(i));
-            creatures.set(i, temp);
-
-            // call max heapify on the reduced heap
-            heapify(creatures, i, 0);
-        }
-        }
-
-        private static void heapify(List<Creature> creatures, int n, int i) {
-        int largest = i; // Initialize largest as root
-        int left = 2 * i + 1; // left = 2*i + 1
-        int right = 2 * i + 2; // right = 2*i + 2
-
-        // If left child is larger than root
-        if (left < n && creatures.get(left).getCreatureName().compareTo(creatures.get(largest).getCreatureName()) > 0) {
-            largest = left;
-        }
-
-        // If right child is larger than largest so far
-        if (right < n && creatures.get(right).getCreatureName().compareTo(creatures.get(largest).getCreatureName()) > 0) {
-            largest = right;
-        }
-
-        // If largest is not root
-        if (largest != i) {
-            Creature swap = creatures.get(i);
-            creatures.set(i, creatures.get(largest));
-            creatures.set(largest, swap);
-
-            // Recursively heapify the affected sub-tree
-            heapify(creatures, n, largest);
-        }
-        }
+        
+        
 
         public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+        public void setId(int id) { this.id = id; }
 
-    public int getGen() { return gen; }
-    public void setGen(int gen) { this.gen = gen; }
+        public int getGen() { return gen; }
+        public void setGen(int gen) { this.gen = gen; }
 
-    public String getCreatureName() { return creatureName; }
-    public void setCreatureName(String creatureName) { this.creatureName = creatureName; }
+        public String getCreatureName() { return creatureName; }
+        public void setCreatureName(String creatureName) { this.creatureName = creatureName; }
 
-    public String getCreatureDescription() { return creatureDescription; }
-    public void setCreatureDescription(String creatureDescription) { this.creatureDescription = creatureDescription; }
+        public String getCreatureDescription() { return creatureDescription; }
+        public void setCreatureDescription(String creatureDescription) { this.creatureDescription = creatureDescription; }
 
-    public List<String> getElementTypes() { return elementTypes; }
-    public void setElementTypes(List<String> elementTypes) { this.elementTypes = elementTypes; }
+        public List<String> getElementTypes() { return elementTypes; }
+        public void setElementTypes(List<String> elementTypes) { this.elementTypes = elementTypes; }
 
-    public List<String> getSkills() { return skills; }
-    public void setSkills(List<String> skills) { this.skills = skills; }
+        public List<String> getSkills() { return skills; }
+        public void setSkills(List<String> skills) { this.skills = skills; }
 
-    public double getWeightInKg() { return weightInKg; }
-    public void setWeightInKg(double weightInKg) { this.weightInKg = weightInKg; }
+        public double getWeightInKg() { return weightInKg; }
+        public void setWeightInKg(double weightInKg) { this.weightInKg = weightInKg; }
 
-    public double getHeightInMeters() { return heightInMeters; }
-    public void setHeightInMeters(double heightInMeters) { this.heightInMeters = heightInMeters; }
+        public double getHeightInMeters() { return heightInMeters; }
+        public void setHeightInMeters(double heightInMeters) { this.heightInMeters = heightInMeters; }
 
-    public int getCaptureProbability() { return captureProbability; }
-    public void setCaptureProbability(int captureProbability) { this.captureProbability = captureProbability; }
+        public int getCaptureProbability() { return captureProbability; }
+        public void setCaptureProbability(int captureProbability) { this.captureProbability = captureProbability; }
 
-    public boolean isLegendaryStatus() { return legendaryStatus; }
-    public void setLegendaryStatus(boolean legendaryStatus) { this.legendaryStatus = legendaryStatus; }
+        public boolean isLegendaryStatus() { return legendaryStatus; }
+        public void setLegendaryStatus(boolean legendaryStatus) { this.legendaryStatus = legendaryStatus; }
 
-    public Date getDateCaptured() { return dateCaptured; }
-    public void setDateCaptured(Date dateCaptured) { this.dateCaptured = dateCaptured; }
+        public Date getDateCaptured() { return dateCaptured; }
+        public void setDateCaptured(Date dateCaptured) { this.dateCaptured = dateCaptured; }
 
-    private String formatList(List<String> list) {
-        StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < list.size(); i++) {
-            sb.append("'").append(list.get(i)).append("'");
-            if (i < list.size() - 1) {
-                sb.append(", ");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
-    public void readCreatureData(String line) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        // Divisão que ignora vírgulas dentro de aspas
-        String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-
-        this.id = Integer.parseInt(fields[0].trim());
-        this.gen = Integer.parseInt(fields[1].trim());
-        this.creatureName = fields[2].trim();
-        this.creatureDescription = fields[3].trim();
-
-        this.elementTypes = new ArrayList<>();
-        if (!fields[4].isEmpty()) {
-            this.elementTypes.add(fields[4].trim());
-        }
-        if (!fields[5].isEmpty()) {
-            this.elementTypes.add(fields[5].trim());
-        }
-
-        this.skills = new ArrayList<>();
-        String abilitiesStr = fields[6].replace("[", "").replace("]", "").replace("'", "").replace("\"", "").trim();
-        if (!abilitiesStr.isEmpty()) {
-            String[] abilitiesArray = abilitiesStr.split(",");
-            for (String ability : abilitiesArray) {
-                this.skills.add(ability.trim());
-            }
-        }
-
-        this.weightInKg = fields[7].isEmpty() ? 0.0 : Double.parseDouble(fields[7].trim());
-        this.heightInMeters = fields[8].isEmpty() ? 0.0 : Double.parseDouble(fields[8].trim());
-        this.captureProbability = fields[9].isEmpty() ? 0 : Integer.parseInt(fields[9].trim());
-        this.legendaryStatus = fields[10].equals("1");
-        this.dateCaptured = sdf.parse(fields[11].trim());
-    }
-
-    public void printCreatureData() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        String formattedTypes = formatList(elementTypes);
-        String formattedSkills = formatList(skills);
-
-        System.out.println("[#" + id + " -> " + creatureName + ": " + creatureDescription + " - " + formattedTypes + " - "
-                + formattedSkills + " - " + weightInKg + "kg - " + heightInMeters + "m - " + captureProbability
-                + "% - " + legendaryStatus + " - " + gen + " gen] - " + sdf.format(dateCaptured));
-    }
-
-    public static void main(String[] args) {
-        try (Scanner inputScanner = new Scanner(System.in)) {
-            List<Creature> creatures = new ArrayList<>();
-            List<Creature> inputCreatures = new ArrayList<>();
-            try (Scanner fileScanner = new Scanner(new File("/tmp/pokemon.csv"))) {
-
-                if (fileScanner.hasNextLine()) {
-                    fileScanner.nextLine();
+        private String formatList(List<String> list) {
+            StringBuilder sb = new StringBuilder("[");
+            for (int i = 0; i < list.size(); i++) {
+                sb.append("'").append(list.get(i)).append("'");
+                if (i < list.size() - 1) {
+                    sb.append(", ");
                 }
+            }
+            sb.append("]");
+            return sb.toString();
+        }
 
-                while (fileScanner.hasNextLine()) {
-                    String line = fileScanner.nextLine();
-                    if (line.equals("FIM")) {
-                        break;
+        public void readCreatureData(String line) throws ParseException {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            // Divisão que ignora vírgulas dentro de aspas
+            String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+            this.id = Integer.parseInt(fields[0].trim());
+            this.gen = Integer.parseInt(fields[1].trim());
+            this.creatureName = fields[2].trim();
+            this.creatureDescription = fields[3].trim();
+
+            this.elementTypes = new ArrayList<>();
+            if (!fields[4].isEmpty()) {
+                this.elementTypes.add(fields[4].trim());
+            }
+            if (!fields[5].isEmpty()) {
+                this.elementTypes.add(fields[5].trim());
+            }
+
+            this.skills = new ArrayList<>();
+            String abilitiesStr = fields[6].replace("[", "").replace("]", "").replace("'", "").replace("\"", "").trim();
+            if (!abilitiesStr.isEmpty()) {
+                String[] abilitiesArray = abilitiesStr.split(",");
+                for (String ability : abilitiesArray) {
+                    this.skills.add(ability.trim());
+                }
+            }
+
+            this.weightInKg = fields[7].isEmpty() ? 0.0 : Double.parseDouble(fields[7].trim());
+            this.heightInMeters = fields[8].isEmpty() ? 0.0 : Double.parseDouble(fields[8].trim());
+            this.captureProbability = fields[9].isEmpty() ? 0 : Integer.parseInt(fields[9].trim());
+            this.legendaryStatus = fields[10].equals("1");
+            this.dateCaptured = sdf.parse(fields[11].trim());
+        }
+
+        public void printCreatureData() {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            String formattedTypes = formatList(elementTypes);
+            String formattedSkills = formatList(skills);
+
+            System.out.println("[#" + id + " -> " + creatureName + ": " + creatureDescription + " - " + formattedTypes + " - "
+                    + formattedSkills + " - " + weightInKg + "kg - " + heightInMeters + "m - " + captureProbability
+                    + "% - " + legendaryStatus + " - " + gen + " gen] - " + sdf.format(dateCaptured));
+        }
+
+        public static void main(String[] args) {
+            try (Scanner inputScanner = new Scanner(System.in)) {
+                List<Creature> creatures = new ArrayList<>();
+                List<Creature> inputCreatures = new ArrayList<>();
+                try (Scanner fileScanner = new Scanner(new File("/tmp/pokemon.csv"))) {
+
+                    if (fileScanner.hasNextLine()) {
+                        fileScanner.nextLine();
                     }
 
-                    Creature creature = new Creature();
-                    creature.readCreatureData(line);
-                    creatures.add(creature);
-                }
-            } catch (FileNotFoundException | ParseException e) {
-                e.printStackTrace();
-            }
+                    while (fileScanner.hasNextLine()) {
+                        String line = fileScanner.nextLine();
+                        if (line.equals("FIM")) {
+                            break;
+                        }
 
-            boolean firstPart = true;
-            boolean secondPart = false;
-
-            while (firstPart) {
-                if (inputScanner.hasNext()) {
-                    String input = inputScanner.next();
-
-                    if (input.equalsIgnoreCase("FIM")) {
-                        firstPart = false;
-                        secondPart = true;
-                        break;
+                        Creature creature = new Creature();
+                        creature.readCreatureData(line);
+                        creatures.add(creature);
                     }
+                } catch (FileNotFoundException | ParseException e) {
+                    e.printStackTrace();
+                }
 
-                    int inputID = Integer.parseInt(input);
-                    for (Creature c : creatures) {
-                        if (c.getId() == inputID) {
-                            inputCreatures.add(c);
+                boolean firstPart = true;
+                boolean secondPart = false;
+
+                while (firstPart) {
+                    if (inputScanner.hasNext()) {
+                        String input = inputScanner.next();
+
+                        if (input.equalsIgnoreCase("FIM")) {
+                            firstPart = false;
+                            secondPart = true;
+                            break;
+                        }
+
+                        int inputID = Integer.parseInt(input);
+                        for (Creature c : creatures) {
+                            if (c.getId() == inputID) {
+                                inputCreatures.add(c);
+                            }
                         }
                     }
                 }
-            }
-            heapSortByName(inputCreatures);
-            for ( Creature c : inputCreatures) {
-                c.printCreatureData();
+                for ( Creature c : inputCreatures) {
+                    c.printCreatureData();
+                }
             }
         }
-    }
 }
