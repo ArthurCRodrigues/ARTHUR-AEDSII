@@ -10,15 +10,15 @@ typedef struct Date {
     int year;
 } Date;
 
-char *dateToString(Date date) {
+char *dateStr(Date date) {
     char *str = (char *)malloc(11 * sizeof(char));
     sprintf(str, "%02d/%02d/%04d", date.day, date.month, date.year);
     return str;
 }
 
-Date stringToDate(char *str) {
+Date strDate(char *str) {
     Date date;
-    if (str != NULL && strlen(str) > 0) { // Verifica se str não é NULL e não está vazia
+    if (str != NULL && strlen(str) > 0) { 
         sscanf(str, "%d/%d/%d", &date.day, &date.month, &date.year);
     } else {
         date.day = 0;
@@ -42,7 +42,7 @@ typedef struct Pokemon {
     Date captureDate;
 } Pokemon;
 
-// strdup aloca memória para a string
+
 char* my_strdup(const char* s) {
     char* copy = (char*)malloc(strlen(s) + 1);
 
@@ -174,7 +174,7 @@ void setCaptureDateDate(Pokemon *p, Date captureDate) {
 }
 
 void setCaptureDateString(Pokemon *p, char *captureDate) {
-    p->captureDate = stringToDate(captureDate);
+    p->captureDate = strDate(captureDate);
 }
 
 Pokemon createPokemon(int id, int generation, char *name,
@@ -218,30 +218,30 @@ Pokemon createPokemon(int id, int generation, char *name,
 
 // Função para dividir uma linha CSV em campos, considerando double quotes
 int split_csv_line(char *line, char **fields, int max_fields) {
-    int field_count = 0;
-    char *ptr = line;
-    int in_quotes = 0;
-    char *field_start = ptr;
+    int num_fields = 0;
+    char *current_ptr = line;
+    int inside_quotes = 0;
+    char *field_start = current_ptr;
 
-    while (*ptr && field_count < max_fields) {
-        if (*ptr == '"') {
-            in_quotes = !in_quotes;
-        } else if (*ptr == ',' && !in_quotes) {
-            *ptr = '\0';
-            fields[field_count++] = field_start;
-            field_start = ptr + 1;
+    while (*current_ptr && num_fields < max_fields) {
+        if (*current_ptr == '"') {
+            inside_quotes = !inside_quotes;
+        } else if (*current_ptr == ',' && !inside_quotes) {
+            *current_ptr = '\0';
+            fields[num_fields++] = field_start;
+            field_start = current_ptr + 1;
         }
-        ptr++;
+        current_ptr++;
     }
-    // Adiciona o último campo
-    if (field_count < max_fields) {
-        fields[field_count++] = field_start;
+    // Add the last field
+    if (num_fields < max_fields) {
+        fields[num_fields++] = field_start;
     }
 
-    return field_count;
+    return num_fields;
 }
 
-// Função para ler os Pokémons do arquivo CSV
+// Função para ler os Pokémons do file CSV
 void lerPokemon(FILE *file, Pokemon *pokedex, int *n) {
     char line[1024];
 
@@ -325,7 +325,7 @@ void lerPokemon(FILE *file, Pokemon *pokedex, int *n) {
         p.isLegendary = atoi(fields[10]);
 
         // captureDate
-        p.captureDate = stringToDate(fields[11]);
+        p.captureDate = strDate(fields[11]);
         
         pokedex[*n] = p;
         (*n)++;
@@ -361,35 +361,37 @@ void imprimirPokemon(Pokemon *p) {
     printf("%d%% - ", getCaptureRate(p));
     printf("%s - ", getIsLegendary(p) ? "true" : "false");
     printf("%d gen] - ", getGeneration(p));
-    char *data = dateToString(getCaptureDate(p));
+    char *data = dateStr(getCaptureDate(p));
     printf("%s", data);
     free(data);
 
     printf("\n");
 }
 
-void shellSort(Pokemon findPokemon[], int tam, int *comp, int *mov) {
+void shellSort(Pokemon inputCreatures[], int tam, int *comp, int *mov) {
     for (int gap = tam / 2 ; gap > 0 ; gap /= 2) {
         for (int i = gap ; i < tam ; i++) {
-            Pokemon key = findPokemon[i];
+            Pokemon key = inputCreatures[i];
             int j = i;
 
             while (j >= gap) {
-                bool weight = findPokemon[j - gap].weight > key.weight;
-                bool weightEquals = findPokemon[j - gap].weight == key.weight;
-                int name = strcmp(findPokemon[j - gap].name, key.name);
+                
+                bool weight = inputCreatures[j - gap].weight > key.weight;
+                bool weightEquals = inputCreatures[j - gap].weight == key.weight;
+                
+                int name = strcmp(inputCreatures[j - gap].name, key.name);
 
                 (*comp)++;
 
                 if (weight || (weightEquals && name > 0)) {
-                    findPokemon[j] = findPokemon[j - gap];
+                    inputCreatures[j] = inputCreatures[j - gap];
                     j -= gap;
                 } else {
                     break;
                 }
             }
             (*mov)++;
-            findPokemon[j] = key;
+            inputCreatures[j] = key;
         }
     }  
     
@@ -405,7 +407,7 @@ int main () {
     FILE *file = fopen(csvPath, "r");   
 
     if (file == NULL) {
-        printf("Erro ao abrir o arquivo CSV.\n");
+        printf("Erro ao abrir o file CSV.\n");
         return 1;
     } 
 
@@ -419,7 +421,7 @@ int main () {
     char inputId[10];
     scanf("%s", inputId);
 
-    Pokemon findPokemon[51];
+    Pokemon inputCreatures[51];
     int comp = 0;
     int mov = 0;
 
@@ -430,7 +432,7 @@ int main () {
 
         for (int i = 0 ; i < n ; i++) {
             if (pokedex[i].id == id) {
-                findPokemon[j++] = pokedex[i];
+                inputCreatures[j++] = pokedex[i];
                 break;
             }
         }
@@ -438,10 +440,10 @@ int main () {
         scanf("%s", inputId); 
     }
 
-    shellSort(findPokemon, j, &comp, &mov);
+    shellSort(inputCreatures, j, &comp, &mov);
 
     for (int i = 0 ; i < j ; i++) {
-        imprimirPokemon(&findPokemon[i]);
+        imprimirPokemon(&inputCreatures[i]);
     }
 
     clock_t end = clock();
@@ -449,15 +451,15 @@ int main () {
 
     // txt
 
-    FILE *arquivo = fopen("844188_shellsort.txt", "w");
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
+    FILE *file = fopen("844188_shellsort.txt", "w");
+    if (file == NULL) {
+        printf("Erro ao abrir o file!\n");
         return 1;
     }
 
     // Escreve a matrícula, tempo de execução e número de comparações separados por tabulação
-    fprintf(arquivo, "844188\t%d\t%%ls\t%.2f\n", comp, mov, executionTime);
-    fclose(arquivo);
+    fprintf(file, "844188\t%d\t%%ls\t%.2f\n", comp, mov, executionTime);
+    fclose(file);
 
     // Libera a memória alocada
     for (int i = 0; i < n; i++) {
