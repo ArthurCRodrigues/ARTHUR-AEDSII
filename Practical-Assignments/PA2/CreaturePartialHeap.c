@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 typedef struct Date {
     int day;
     int month;
@@ -29,7 +28,6 @@ Date stringToDate(char *str) {
     return date;
 }
 
-
 typedef struct Pokemon {
     int id;
     int generation;
@@ -43,7 +41,6 @@ typedef struct Pokemon {
     bool isLegendary;
     Date captureDate;
 } Pokemon;
-
 
 // strdup aloca memória para a string
 char* my_strdup(const char* s) {
@@ -219,7 +216,7 @@ Pokemon createPokemon(int id, int generation, char *name,
     return p;
 }
 
-// Função para dividir uma linha CSV em campos, considerando double quotes
+
 int split_csv_line(char *line, char **fields, int max_fields) {
     int field_count = 0;
     char *ptr = line;
@@ -245,7 +242,7 @@ int split_csv_line(char *line, char **fields, int max_fields) {
 }
 
 // Função para ler os Pokémons do arquivo CSV
-void lerPokemon(FILE *file, Pokemon *pokedex, int *n) {
+void lerPokemon(FILE *file, Pokemon *creatures, int *n) {
     char line[1024];
 
     fgets(line, sizeof(line), file); // Lê o cabeçalho do CSV
@@ -330,7 +327,7 @@ void lerPokemon(FILE *file, Pokemon *pokedex, int *n) {
         // captureDate
         p.captureDate = stringToDate(fields[11]);
         
-        pokedex[*n] = p;
+        creatures[*n] = p;
         (*n)++;
     }
 }
@@ -371,31 +368,93 @@ void imprimirPokemon(Pokemon *p) {
     printf("\n");
 }
 
-void shellSort(Pokemon inputCreatures[], int tam, int *comp, int *mov) {
-    for (int gap = tam / 2 ; gap > 0 ; gap /= 2) {
-        for (int i = gap ; i < tam ; i++) {
-            Pokemon key = inputCreatures[i];
-            int j = i;
+int compareDates(Date *date1, Date *date2) {
+    // Primeiro, compara os anos
+    if (date1->year != date2->year) {
+        return date1->year - date2->year;
+    }
 
-            while (j >= gap) {
-                bool weight = inputCreatures[j - gap].weight > key.weight;
-                bool weightEquals = inputCreatures[j - gap].weight == key.weight;
-                int name = strcmp(inputCreatures[j - gap].name, key.name);
+    // Se os anos são iguais, compara os meses
+    if (date1->month != date2->month) {
+        return date1->month - date2->month;
+    }
 
-                (*comp)++;
+    // Se os meses são iguais, compara os dias
+    return date1->day - date2->day;
+}
 
-                if (weight || (weightEquals && name > 0)) {
-                    inputCreatures[j] = inputCreatures[j - gap];
-                    j -= gap;
-                } else {
-                    break;
-                }
-            }
-            (*mov)++;
-            inputCreatures[j] = key;
+void swap(Pokemon *a, Pokemon *b) {
+    Pokemon aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+void heapify(Pokemon heap[], int n, int i, int *comp, int *mov) {
+    int largest = i; // inicializa como raiz
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if(left < n) {
+        (*comp)++;
+        if ((heap[left].height > heap[largest].height) || 
+        ((heap[left].height == heap[largest].height) && (strcmp(heap[left].name, heap[largest].name) > 0))) {
+            largest = left;
         }
-    }  
-    
+    }
+
+    if (right < n) {
+        (*comp)++;
+        if ((heap[right].height > heap[largest].height) || 
+        ((heap[right].height == heap[largest].height) && (strcmp(heap[right].name, heap[largest].name) > 0))) {
+            largest = right;
+        }
+    }
+
+    if (largest != i) {
+        swap(&heap[i], &heap[largest]);
+        (*mov)++;
+
+        heapify(heap, n, largest, comp, mov);
+    }
+}
+
+void buildHeap(Pokemon heap[], int n, int *comp, int *mov) {
+    int startIdx = (n / 2) - 1;
+    for (int i = startIdx ; i >= 0 ; i--) {
+        heapify(heap, n, i, comp, mov);
+    }
+}
+
+void partialHeapSort(Pokemon inputCreatures[], int n, int k, int *comp, int *mov) {
+    // Cria um heap máximo com os primeiros k elementos
+    Pokemon heap[k];
+    for (int i = 0 ; i < k ; i++) {
+        heap[i] = inputCreatures[i];
+        (*mov)++;
+    }
+    buildHeap(heap, k, comp, mov);
+
+    // Para cada elemento restante no array
+    for (int i = k ; i < n ; i++) {
+        (*comp)++;
+        if ((inputCreatures[i].height < heap[0].height) || 
+        ((inputCreatures[i].height == heap[0].height) && (strcmp(inputCreatures[i].name, heap[0].name)< 0))) {
+            heap[0] = inputCreatures[i];
+            (*mov)++;
+            heapify(heap, k, 0, comp, mov);
+        }
+    }
+
+    for (int i = k - 1 ; i >= 0 ; i--) {
+        // Move a raiz para o final do heap
+        inputCreatures[i] = heap[0];
+        (*mov)++;
+        // Substitui a raiz pelo último elemento do heap
+        heap[0] = heap[i];
+        (*mov)++;
+        // Ajusta o heap
+        heapify(heap, i, 0, comp, mov);
+    }
 }
 
 // main
@@ -412,10 +471,10 @@ int main () {
         return 1;
     } 
 
-    Pokemon pokedex[801];
+    Pokemon creatures[801];
     int n = 0;
 
-    lerPokemon(file, pokedex, &n);
+    lerPokemon(file, creatures, &n);
 
     fclose(file);
 
@@ -425,15 +484,14 @@ int main () {
     Pokemon inputCreatures[51];
     int comp = 0;
     int mov = 0;
-
     int j = 0;
     
     while (strcmp(inputId, "FIM") != 0) {
         int id = atoi(inputId);
 
         for (int i = 0 ; i < n ; i++) {
-            if (pokedex[i].id == id) {
-                inputCreatures[j++] = pokedex[i];
+            if (creatures[i].id == id) {
+                inputCreatures[j++] = creatures[i];
                 break;
             }
         }
@@ -441,9 +499,11 @@ int main () {
         scanf("%s", inputId); 
     }
 
-    shellSort(inputCreatures, j, &comp, &mov);
+    int k = 10;
 
-    for (int i = 0 ; i < j ; i++) {
+    partialHeapSort(inputCreatures, j, k, &comp, &mov);
+
+    for (int i = 0 ; i < k ; i++) {
         imprimirPokemon(&inputCreatures[i]);
     }
 
@@ -452,20 +512,20 @@ int main () {
 
     // txt
 
-    FILE *arquivo = fopen("844188_shellsort.txt", "w");
+    FILE *arquivo = fopen("844188_partialHeapSort.txt", "w");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
     }
 
     // Escreve a matrícula, tempo de execução e número de comparações separados por tabulação
-    fprintf(arquivo, "844188\t%d\t%%ls\t%.2f\n", comp, mov, executionTime);
+    fprintf(arquivo, "844188\t%d\t%d\t%.2f\n", comp, mov, executionTime);
     fclose(arquivo);
 
     // Libera a memória alocada
     for (int i = 0; i < n; i++) {
-        free(pokedex[i].name);
-        free(pokedex[i].description);
+        free(creatures[i].name);
+        free(creatures[i].description);
     }
 
     return 0;

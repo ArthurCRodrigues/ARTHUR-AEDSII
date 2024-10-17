@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 typedef struct Date {
     int day;
     int month;
@@ -29,7 +28,6 @@ Date stringToDate(char *str) {
     return date;
 }
 
-
 typedef struct Pokemon {
     int id;
     int generation;
@@ -43,7 +41,6 @@ typedef struct Pokemon {
     bool isLegendary;
     Date captureDate;
 } Pokemon;
-
 
 // strdup aloca memória para a string
 char* my_strdup(const char* s) {
@@ -371,31 +368,30 @@ void imprimirPokemon(Pokemon *p) {
     printf("\n");
 }
 
-void shellSort(Pokemon inputCreatures[], int tam, int *comp, int *mov) {
-    for (int gap = tam / 2 ; gap > 0 ; gap /= 2) {
-        for (int i = gap ; i < tam ; i++) {
-            Pokemon key = inputCreatures[i];
-            int j = i;
+void swap(Pokemon *a, Pokemon *b) {
+    Pokemon aux = *a;
+    *a = *b;
+    *b = aux;
+}
 
-            while (j >= gap) {
-                bool weight = inputCreatures[j - gap].weight > key.weight;
-                bool weightEquals = inputCreatures[j - gap].weight == key.weight;
-                int name = strcmp(inputCreatures[j - gap].name, key.name);
+void bubbleSort(Pokemon inputCreatures[], int tam, int *comp, int *mov) {
+    int i, j;
+    int swapped;
 
-                (*comp)++;
-
-                if (weight || (weightEquals && name > 0)) {
-                    inputCreatures[j] = inputCreatures[j - gap];
-                    j -= gap;
-                } else {
-                    break;
-                }
+    for (i = 0 ; i < tam - 1 ; i++) {
+        swapped = 0;
+        for (j = 0 ; j < tam - i - 1 ; j++) {
+            (*comp)++;
+            if (inputCreatures[j].id > inputCreatures[j + 1].id) {
+                (*mov)++;
+                swap(&inputCreatures[j], &inputCreatures[j + 1]);
+                swapped = 1;
             }
-            (*mov)++;
-            inputCreatures[j] = key;
         }
-    }  
-    
+
+        if (swapped == 0) 
+            break;
+    }
 }
 
 // main
@@ -425,7 +421,6 @@ int main () {
     Pokemon inputCreatures[51];
     int comp = 0;
     int mov = 0;
-
     int j = 0;
     
     while (strcmp(inputId, "FIM") != 0) {
@@ -441,7 +436,7 @@ int main () {
         scanf("%s", inputId); 
     }
 
-    shellSort(inputCreatures, j, &comp, &mov);
+    bubbleSort(inputCreatures, j, &comp, &mov);
 
     for (int i = 0 ; i < j ; i++) {
         imprimirPokemon(&inputCreatures[i]);
@@ -452,17 +447,16 @@ int main () {
 
     // txt
 
-    FILE *arquivo = fopen("844188_shellsort.txt", "w");
+    FILE *arquivo = fopen("844188_bolha.txt", "w");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
     }
 
-    // Escreve a matrícula, tempo de execução e número de comparações separados por tabulação
-    fprintf(arquivo, "844188\t%d\t%%ls\t%.2f\n", comp, mov, executionTime);
+
+    fprintf(arquivo, "844188\t%d\t%d\t%.2f\n", comp, mov, executionTime);
     fclose(arquivo);
 
-    // Libera a memória alocada
     for (int i = 0; i < n; i++) {
         free(pokedex[i].name);
         free(pokedex[i].description);
