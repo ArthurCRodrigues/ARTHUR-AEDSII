@@ -1,28 +1,29 @@
 public class SelectionSort {
-    public static void SeleSort(int arr[]) {
+    public static void selectionSort(int[] arr) {
         int n = arr.length;
-        for (int i = 0 ; i < (n-1); i++ ) {
-                int smallest = i;
-                for (int j = i+1 ; j < n; j++) {
-                    if (arr[smallest] > arr[j]) {
-                        smallest = j;
-                    }
+        
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
                 }
-                int temp = arr[smallest];
-                arr[smallest] = arr[i];
-                arr[i] = temp;
+            }
+            
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
         }
     }
+    
     public static void main(String[] args) {
-        int[] arr = {10,9,3,1,7,4,2,6,5,8};
-        System.out.println("Array before sorting: ");
-        for (int num : arr) {
-            System.out.printf("%d\t",num);
-        }
-        SeleSort(arr);
-        System.out.println("\nArray after sorting: ");
-        for (int num : arr) {
-            System.out.printf("%d\t",num);
+        int[] arr = {64, 25, 12, 22, 11};
+        selectionSort(arr);
+        
+        System.out.println("Sorted array:");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
     }
 }
