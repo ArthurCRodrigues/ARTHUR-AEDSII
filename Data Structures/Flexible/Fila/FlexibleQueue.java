@@ -43,6 +43,14 @@ public class FlexibleQueue {
         }
         return maior;
     }
+    public int RetornarTerceiro()throws Exception{
+        Celula temp = primeiro.prox;
+        for(int i=0;i<2;i++){
+            if(temp == null) throw new Exception("cu");
+            temp= temp.prox;  
+        }
+        return temp.elemento;
+    }
 
     public static void main(String[] args) {
         FlexibleQueue Fila = new FlexibleQueue();
@@ -50,16 +58,19 @@ public class FlexibleQueue {
             Fila.inserir(i);
         }
         Fila.mostrar();
-        System.out.println("Maior elemento. -> "+ Fila.maior());
-        for (int i = 0; i < 10; i++) {
-            try {
-                System.out.println("Item removido! -> " + Fila.remover());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            System.out.println("Terceiro elemento. -> "+ Fila.RetornarTerceiro());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        try {
+            System.out.println("Maior elemento. -> "+ Fila.maior());
+        } catch (Exception a) {
+            System.out.println(a.getMessage());
         }
-    }
+       
 
 
 
+}
+}
 }
