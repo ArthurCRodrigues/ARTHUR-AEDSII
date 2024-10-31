@@ -1,27 +1,27 @@
 
 public class FlexibleStack {
-    private Celula topo;
+    private CelulaS topo;
     public FlexibleStack() {
         topo = null;
     }
     public void inserir(int x) {
-        Celula tmp = new Celula(x);
-        tmp.prox = topo;
+        CelulaS tmp = new CelulaS(x);
+        tmp.prox1 = topo;
         topo = tmp;
         tmp = null;
     }
     public int remover() throws Exception {
         if (topo == null) throw new Exception("Erro!");
         int elemento = topo.elemento;
-        Celula tmp = topo;
-        topo = topo.prox;
-        tmp.prox = null;
+        CelulaS tmp = topo;
+        topo = topo.prox1;
+        tmp.prox1 = null;
         tmp = null;
         return elemento;
     }
     public void mostrar() {
         System.out.print("[");
-        for (Celula i = topo; i != null; i = i.prox){
+        for (CelulaS i = topo; i != null; i = i.prox1){
             System.out.print(i.elemento+" ");
         }
         System.out.println("]");

@@ -1,13 +1,14 @@
+
 public class Celula {
     public int elemento;
     public Celula prox;
-
-    Celula() {
+    public Celula(){
         this(0);
     }
-
-    Celula(int elemento) {
+    public Celula(int x) {
+        this.elemento = x;
         this.prox = null;
-        this.elemento = elemento;
     }
+
+
 }

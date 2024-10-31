@@ -1,11 +1,14 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
+        "pas/PA3",
         "Practical-Assignments/PEprep",
+        "Practical-Assignments/PA3",
         "Practical-Assignments/PA2",
         "Practical-Assignments/PA1",
         "Data Structures/Non-Flexible/Fila",
         "Data Structures/Flexible/Pilha",
-        "Data Structures/Flexible/Fila"
+        "Data Structures/Flexible/Fila",
+        "pas/pa3"
     ]
 }
