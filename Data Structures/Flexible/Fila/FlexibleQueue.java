@@ -58,7 +58,12 @@ public class FlexibleQueue {
             Fila.inserir(i);
         }
         Fila.mostrar();
-        System.out.println("Maior elemento. -> "+ Fila.maior());
+        try {
+            System.out.println("Maior elemento. -> "+ Fila.maior());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
         for (int i = 0; i < 10; i++) {
             try {
                 System.out.println("Item removido! -> " + Fila.remover());
@@ -70,6 +75,5 @@ public class FlexibleQueue {
 
 
 
-}
 }
 }

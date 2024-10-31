@@ -18,7 +18,7 @@ class Pokemon {
     private boolean isLegendary;
     private LocalDate captureDate;
 
-
+    
     public Pokemon () { }
 
     public Pokemon (int id, int generation, String name, 
