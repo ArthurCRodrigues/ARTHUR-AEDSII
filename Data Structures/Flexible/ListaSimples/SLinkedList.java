@@ -24,7 +24,7 @@ public class SLinkedList {
         tmp = null;
         return resp;
     }
-    public void inserirFIm(int x) {
+    public void inserirFim(int x) {
         ultimo.prox = new Celula(x);
         ultimo = ultimo.prox;
     }
