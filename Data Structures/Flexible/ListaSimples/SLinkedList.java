@@ -1,9 +1,11 @@
 public class SLinkedList {
     private Celula primeiro,ultimo;
+    
     SLinkedList() {
         primeiro = new Celula();
         ultimo = primeiro;
     }
+    
     public void inserirInicio(int x) {
         Celula elemento = new Celula(x);
         elemento.prox = primeiro.prox;
@@ -13,7 +15,8 @@ public class SLinkedList {
         }
         elemento = null;
     }
-    public int removerInicio() {
+
+    public int removerInicio() throws Exception {
         if (primeiro == ultimo) {
             throw new Exception("Erro ao remover!");
         }
@@ -21,7 +24,7 @@ public class SLinkedList {
         primeiro = primeiro.prox;
         int resp = primeiro.elemento;
         tmp.prox = null;
-        tmp = null;
+        tmp = null; //garbage collector will take care of this
         return resp;
     }
     public void inserirFim(int x) {
@@ -52,16 +55,20 @@ public class SLinkedList {
         aux.prox = tmp;
         tmp = aux = null;
     }
-    public int remover(int pos) throws Exception {
-        if (pos == 0) return removerInicio();
-        if (primeiro == ultimo) return removerFim();
-        Celula aux = primeiro;
-        for (int i = 0 ; i < pos; i++, aux = aux.prox) {
-            if (aux == null) throw new Exception("error!");
+    
+
+    public int tamanho() {
+        if (primeiro == ultimo) return 0;
+        int resp = 0;
+        for (Celula i = primeiro; i != ultimo; i = i.prox, resp++ ); 
+        return resp;
+    }
+    public void print() {
+        System.out.print("[");
+        for (Celula i = primeiro.prox; i != null; i = i.prox) {
+            System.out.print(" "+i.elemento);
         }
-        Celula resp = aux.prox;
-        aux = aux.prox;
-        
+        System.out.print(" ]\n");
     }
     
 
