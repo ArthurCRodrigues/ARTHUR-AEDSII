@@ -6,5 +6,12 @@ public class main {
         }
         System.out.println("Tamanho -> "+ Lista.tamanho());
         Lista.print();
+
+        try {
+            System.out.println("Item removed -> "+ Lista.remover(2));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        Lista.print();
     }
 }

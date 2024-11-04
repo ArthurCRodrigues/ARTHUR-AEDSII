@@ -1,3 +1,5 @@
+
+
 public class SLinkedList {
     private Celula primeiro,ultimo;
     
@@ -54,6 +56,27 @@ public class SLinkedList {
         tmp.prox = aux.prox;
         aux.prox = tmp;
         tmp = aux = null;
+    }
+
+    public int remover(int pos) throws Exception {
+        int resp;
+        int length = this.tamanho();
+        if (primeiro == ultimo) throw new Exception("The list is empty!");
+        else if (pos < 0 || pos >= length) throw new Exception("List index out of range!");
+        else if (pos == 0) resp = removerInicio();
+        else if (pos == length -1) resp = removerFim();
+        else {
+            Celula lst = primeiro;
+            for (int i = 0; i < pos; i++) {
+                lst = lst.prox;
+            }
+            Celula removable = lst.prox;
+            resp = removable.elemento;
+            lst.prox = removable.prox;
+            removable.prox = removable = null;
+            lst = null;
+        }
+        return resp;
     }
     
 
