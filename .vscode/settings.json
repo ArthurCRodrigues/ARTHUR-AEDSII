@@ -4,7 +4,8 @@
         "pas/pa3",
         "Data Structures/Non-Flexible/Fila",
         "Data Structures/Flexible/Pilha",
+        "Data Structures/Flexible/ListaSimples",
         "Data Structures/Flexible/Fila",
-        "Data Structures/Flexible/ListaSimples"
+        "LAB/SBC"
     ]
 }
