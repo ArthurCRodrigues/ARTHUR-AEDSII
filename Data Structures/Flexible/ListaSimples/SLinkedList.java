@@ -69,7 +69,7 @@ public class SLinkedList {
             Celula lst = primeiro;
             for (int i = 0; i < pos; i++) {
                 lst = lst.prox;
-            }
+            } 
             Celula removable = lst.prox;
             resp = removable.elemento;
             lst.prox = removable.prox;

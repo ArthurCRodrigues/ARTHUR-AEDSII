@@ -1,11 +1,14 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
-        "pas/pa3",
         "Data Structures/Non-Flexible/Fila",
         "Data Structures/Flexible/Pilha",
         "Data Structures/Flexible/ListaSimples",
         "Data Structures/Flexible/Fila",
+<<<<<<< HEAD
         "LAB/SBC"
+=======
+        "Data Structures/Non-Flexible/Pilha"
+>>>>>>> 76379ddaf1339689ceb1fa15d3cdd093da21b4c6
     ]
 }
