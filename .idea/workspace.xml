@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd771b82-98d6-4734-8f25-0912248ef1ec" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/ARTHUR-AEDSII.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ARTHUR-AEDSII.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Practical-Assignments/PA1/boolAlgebra.java" beforeDir="false" afterPath="$PROJECT_DIR$/Practical-Assignments/PA1/boolAlgebra.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +16,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ArthurCRodrigues"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ArthurCRodrigues/ARTHUR-AEDSII.git",
+    "accountId": "39081671-cf72-408e-9200-e847fce9b210"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -30,19 +40,22 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CaesarCipher.executor": "Run",
+    "Application.Main.executor": "Run",
     "Application.SimpleBooleanAlgebraEvaluator.executor": "Run",
     "Application.boolAlgebra.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Arthur/Desktop/CC/College/2nd_Semester/AEDSII",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,6 +79,7 @@
       <workItem from="1725023125836" duration="57000" />
       <workItem from="1725023216910" duration="295000" />
       <workItem from="1725036925884" duration="2765000" />
+      <workItem from="1730833327610" duration="8559000" />
     </task>
     <servers />
   </component>
