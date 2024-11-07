@@ -14,7 +14,7 @@ public class Pilha {
 
     public void add(int element) throws Exception {
         if (n >= array.length) {
-            throw new Exception("Stack is full!")
+            throw new Exception("Stack is full!");
         }
         array[n] = element;
         n++;
@@ -24,5 +24,14 @@ public class Pilha {
             throw new Exception("Error! Stack is empty");
         }
         return array[--n];
+    }
+    public int getMin() {
+        int min = array[0];
+        for (int i = 1 ; i < n ; i++) {
+            if (array[i]<min) {
+                min = array[i];
+            }
+        }
+        return min;
     }
 }
