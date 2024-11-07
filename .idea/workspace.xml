@@ -13,21 +13,28 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ArthurCRodrigues"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ArthurCRodrigues&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ArthurCRodrigues/ARTHUR-AEDSII.git",
-    "accountId": "39081671-cf72-408e-9200-e847fce9b210"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ArthurCRodrigues/ARTHUR-AEDSII.git&quot;,
+    &quot;accountId&quot;: &quot;39081671-cf72-408e-9200-e847fce9b210&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -40,9 +47,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CaesarCipher.executor": "Run",
+    "Application.CelulaMatriz.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.SimpleBooleanAlgebraEvaluator.executor": "Run",
     "Application.boolAlgebra.executor": "Run",
+    "Application.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
@@ -80,6 +89,7 @@
       <workItem from="1725023216910" duration="295000" />
       <workItem from="1725036925884" duration="2765000" />
       <workItem from="1730833327610" duration="8559000" />
+      <workItem from="1730918824124" duration="5999000" />
     </task>
     <servers />
   </component>
