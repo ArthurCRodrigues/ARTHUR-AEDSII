@@ -47,7 +47,6 @@ public class Tree {
         else if (rootP.element > element) {
             System.out.println("Entering recursion for left element (root.element > element)");
             return searchHelper(rootP.left,element);
-            
         } 
         else if (rootP.element < element) {
             System.out.println("Entering recursion for right element (root.element < element)");
@@ -55,5 +54,20 @@ public class Tree {
         }
         return false;
     } 
+    public int findMax() {
+        return findMaxHelper(this.root);
+    }
+    private int findMaxHelper(Node rootP) {
+        if (rootP.right == null) return rootP.element;
+        else return findMaxHelper(rootP.right);
+    }
+    public int findMin() {
+        return findMinHelper(this.root);
+    }
+    private int findMinHelper(Node rootP) {
+        if (rootP.left == null) return rootP.element;
+        else return findMinHelper(rootP.left);
+        
+    }
 
 }
