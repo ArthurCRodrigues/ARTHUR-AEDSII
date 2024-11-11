@@ -20,36 +20,32 @@ public class Tree {
         return rootP;
     }
     public void display() {
-        System.out.println("Called Method");
+        System.out.print("[ ");
         displayHelper(root);
+        System.out.println("]");
     }
     private void displayHelper(Node rootP) {
-      if (rootP != null) {
-        displayHelper(rootP.left);
-        System.out.println(rootP.element);
-        displayHelper(rootP.right);
-      } 
-    } 
+        if (rootP != null) {
+          displayHelper(rootP.left);
+          System.out.print(rootP.element+" ");
+          displayHelper(rootP.right);
+        } 
+      }  
     public boolean  search(int element) {
         return searchHelper(this.root, element);
     }
     
     private boolean searchHelper(Node rootP,int element) {
-        System.out.println("--- Root is currently "+rootP.element+" ---");
         if (rootP == null) {
-            System.out.println("NULL!!");
             return false;
         }
         if (rootP.element == element) {
-            System.out.println("Found!");
             return true;
         }
         else if (rootP.element > element) {
-            System.out.println("Entering recursion for left element (root.element > element)");
             return searchHelper(rootP.left,element);
         } 
         else if (rootP.element < element) {
-            System.out.println("Entering recursion for right element (root.element < element)");
             return searchHelper(rootP.right, element);
         }
         return false;
@@ -69,5 +65,32 @@ public class Tree {
         else return findMinHelper(rootP.left);
         
     }
+    public void remove(int element) {
+        if (!this.search(element)) {
+            return;
+        }
+        removeHelper(this.root,element);
+    }
+    private Node removeHelper(Node rootP, int element) {
+        if (rootP == null) return rootP;
+        else if (element < rootP.element) rootP.left = removeHelper(rootP.left,element);
+        else if (element > rootP.element) rootP.right = removeHelper(rootP.right,element);
+        else {//node found
+            if (rootP.left == null && rootP.right == null) { 
+                rootP = null;
+            }
+            else if (rootP.right != null) { //find a sucessor to replace this node
+                rootP.element = findMaxHelper(rootP);
+                rootP.right = removeHelper(rootP.right,rootP.element);
+            }
+            else { //find a predecessor to replace this node
+                rootP.element = findMinHelper(rootP);
+                rootP.left = removeHelper(rootP.left,rootP.element);
+            }
+        }
+        return rootP;
+    }
+
+    
 
 }

@@ -16,5 +16,9 @@ public class MainTree {
         System.out.println(tree.search(2));
         System.out.println("Max element is: "+tree.findMax());
         System.out.println("Min element is: "+tree.findMin());
+        tree.remove(2);
+        tree.remove(6);
+        tree.remove(7);
+        tree.display();
     }   
 }
