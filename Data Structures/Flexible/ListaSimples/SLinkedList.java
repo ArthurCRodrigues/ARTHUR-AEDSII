@@ -1,7 +1,7 @@
 
 
 public class SLinkedList {
-    private Celula primeiro,ultimo;
+    public Celula primeiro,ultimo;
     
     SLinkedList() {
         primeiro = new Celula();

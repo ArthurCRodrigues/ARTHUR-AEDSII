@@ -8,6 +8,6 @@
         "Data Structures/Flexible/Matriz",
         "Data Structures/Flexible/ListaSimples",
         "Data Structures/Flexible/Fila",
-        "Data Structures/Tree"
+        "Data Structures/Tree/HibridTree"
     ]
 }
