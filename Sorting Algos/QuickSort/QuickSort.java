@@ -1,54 +1,34 @@
 public class QuickSort {
-
-    public static void quicksort(int[] arr, int left, int right) {
-        if (left < right) {
-            // Get the pivot index
-            int pivotIndex = partition(arr, left, right);
-            
-            // Recursively apply quicksort to the left and right sub-arrays
-            quicksort(arr, left, pivotIndex - 1);
-            quicksort(arr, pivotIndex + 1, right);
-        }
+    public static void sort(int[] arr) {
+        int end = arr.length -1;
+        quicksort(arr,0,end);
     }
-
-    private static int partition(int[] arr, int left, int right) {
-        // Choose the middle element as the pivot
-        int middle = left + (right - left) / 2;
-        int pivot = arr[middle];
-
-        // Swap the pivot with the right element
-        swap(arr, middle, right);
-
-        // Initialize the partitioning index
-        int partitionIndex = left;
-
-        for (int i = left; i < right; i++) {
-            if (arr[i] <= pivot) {
-                swap(arr, i, partitionIndex);
-                partitionIndex++;
+    public static void quicksort(int[] arr, int start, int end) {
+        int i = start;
+        int j = end;
+        int pivot = arr[(start+end)/2];
+        while (i <= j) {
+            while (arr[i]<pivot) i++;
+            while(arr[j]>pivot) j--;
+            if (i <= j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+                j--;
             }
         }
-
-        // Swap back the pivot to its correct position
-        swap(arr, partitionIndex, right);
-
-        return partitionIndex;
+        if (start < j) quicksort(arr, start, j);
+        if (i < end) quicksort(arr, i, end);
     }
-
-    private static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
     public static void main(String[] args) {
-        int[] arr = {3, 6, 8, 10, 1, 2, 1};
-        
-        quicksort(arr, 0, arr.length - 1);
-
-        // Print the sorted array
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
+        int[] arr = {1,8,3,2,7,4,5,6};
+        System.out.print("Array before sorting: [");
+        for (int c : arr) System.out.print(c+" ");
+        System.out.print("]\n");
+        sort(arr);
+        System.out.print("Array after sorting: [");
+        for (int c : arr) System.out.print(c+" ");
+        System.out.print("]\n");
     }
 }
