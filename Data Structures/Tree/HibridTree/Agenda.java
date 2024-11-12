@@ -1,12 +1,41 @@
 public class Agenda {
-    Node root;
+    NodeG root;
     Agenda(char[] letters) {
-        this.root = null;
+        this.root = new NodeG(findMid(letters));
+        for (int i = 0; i < letters.length; i++) {
+            if (letters[i] != root.letra) {
+                NodeGHelper(this.root,letters[i]);
+            }
+        }
+    }
+    private NodeG NodeGHelper(NodeG rootP, char letter) {
+            if (rootP == null) {
+                rootP = new NodeG(letter);
+                return rootP;
+            }
+            else if (letter > rootP.letra) rootP.dir = NodeGHelper(rootP.dir,letter);
+            else rootP.esq = NodeGHelper(rootP.esq,letter);
+            return rootP;
+        }
+    private char findMid(char[] letters ) {
+        int median = 0;
+        for (int i = 0; i < letters.length; i++) {
+            median += (int) letters[i];
+        } 
+        median = median/letters.length;
+        int ind = 0;
+        for (int i = 1 ; i < letters.length; i++) {
+            if (getDiff(letters[i],median) < getDiff(letters[ind],median)) ind = i; 
+        }
+        return letters[ind];
+    }
+    private int getDiff(char letter,int median) {
+        return Math.abs(median - (int)letter);
     }
     public void inserir(Contato contato) {
         inserirHelper(this.root,contato);
     }
-    private void inserirHelper(Node rootP, Contato c) {
+    private void inserirHelper(NodeG rootP, Contato c) {
         char letter = c.nome.charAt(0);
         if (rootP.letra == letter) {
             rootP.insert(c);
@@ -17,7 +46,7 @@ public class Agenda {
     public void remover(String nome) {
         removerHelper(this.root,nome);
     }
-    private void removerHelper(Node rootP,String nome) {
+    private void removerHelper(NodeG rootP,String nome) {
         char letter = nome.charAt(0);
         if (rootP.letra == letter) {
             rootP.remove(nome);
@@ -28,7 +57,7 @@ public class Agenda {
     public Contato search(String nome) {
         return searchHelper(this.root,nome);
     }
-    private Contato searchHelper(Node rootP, String nome) {
+    private Contato searchHelper(NodeG rootP, String nome) {
         char letter = nome.charAt(0);
         if (rootP.letra == letter) {
             return rootP.pesquisar(nome);
@@ -40,7 +69,7 @@ public class Agenda {
     public Contato search(int CPF) {
         return searchHelper(this.root,CPF);
     }
-    private Contato searchHelper(Node rootP, int CPF) {
+    private Contato searchHelper(NodeG rootP, int CPF) {
         if (rootP != null) {
             Contato resp = rootP.pesquisar(CPF);
             if (resp != null) return resp;
@@ -49,4 +78,18 @@ public class Agenda {
         }
         return null;
     }
+    public void display() {
+        System.out.print("[ ");
+        displayHelper(root);
+        System.out.println("]");
+    }
+    private void displayHelper(NodeG rootP) {
+        if (rootP != null) {
+          displayHelper(rootP.esq);
+          System.out.println("Letra "+rootP.letra);
+          rootP.display();
+          displayHelper(rootP.dir);
+        } 
+      } 
+    
 }

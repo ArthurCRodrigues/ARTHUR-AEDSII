@@ -1,8 +1,8 @@
-public class Node {
+public class NodeG {
     char letra;
-    Node esq,dir;
+    NodeG esq,dir;
     CelulaCTT primeiro,ultimo;
-    Node (char letra) {
+    NodeG (char letra) {
         this.letra = letra;
         this.esq = this.dir = null;
         primeiro = new CelulaCTT();
