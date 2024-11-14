@@ -1,6 +1,4 @@
 package Q01;
-
-public class CelulaP {
     public Pokemon elemento;
     public CelulaP prox;
     public CelulaP(){

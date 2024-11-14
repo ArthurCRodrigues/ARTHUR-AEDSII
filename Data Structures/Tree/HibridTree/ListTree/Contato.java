@@ -1,3 +1,4 @@
+package ListTree;
 public class Contato {
     public String nome;
     public String telefone;
