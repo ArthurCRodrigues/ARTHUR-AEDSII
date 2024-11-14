@@ -1,3 +1,4 @@
+package ListTree;
 public class Agenda {
     NodeG root;
     Agenda(char[] letters) {

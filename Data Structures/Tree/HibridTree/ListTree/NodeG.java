@@ -1,3 +1,4 @@
+package ListTree;
 public class NodeG {
     char letra;
     NodeG esq,dir;
