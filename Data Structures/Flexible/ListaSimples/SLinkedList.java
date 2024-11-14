@@ -2,7 +2,7 @@
 
 public class SLinkedList {
     public Celula primeiro,ultimo;
-    
+    int sorting = 1;
     SLinkedList() {
         primeiro = new Celula();
         ultimo = primeiro;
@@ -92,6 +92,44 @@ public class SLinkedList {
             System.out.print(" "+i.elemento);
         }
         System.out.print(" ]\n");
+    }
+    public SLinkedList ListSort() {
+
+        return ListSortHelper(this);
+    }
+    private SLinkedList ListSortHelper(SLinkedList lista) {
+        if (lista.tamanho() < 2) {
+            return lista;
+        }
+        Celula pivot = lista.ultimo;
+        Celula auxI;
+        sorting++;
+        lista.print();
+        SLinkedList listaLft = new SLinkedList();
+        SLinkedList listaRgt = new SLinkedList();
+        for (auxI = lista.primeiro.prox; auxI != lista.ultimo; auxI = auxI.prox) {
+            if (auxI.elemento < pivot.elemento) listaLft.inserirFim(auxI.elemento);
+            else if (auxI.elemento >= pivot.elemento) listaRgt.inserirFim(auxI.elemento);
+        };
+        listaLft = ListSortHelper(listaLft);
+        listaRgt = ListSortHelper(listaRgt);
+        if (listaLft.tamanho() == 0 ) listaLft.inserirFim(pivot.elemento);
+        else {
+            listaLft.ultimo.prox = pivot;
+            listaLft.ultimo = pivot;
+        }
+        listaLft.ultimo.prox = listaRgt.primeiro.prox;
+        if (listaRgt.tamanho() == 0)listaLft.ultimo = pivot; 
+        else listaLft.ultimo = listaRgt.ultimo;
+        return listaLft;
+    }
+    public SLinkedList concatenate(SLinkedList other) {
+        SLinkedList resp = this;
+        resp.ultimo.prox = other.primeiro.prox;
+        resp.ultimo = other.ultimo;
+        return resp;
+
+
     }
     
 

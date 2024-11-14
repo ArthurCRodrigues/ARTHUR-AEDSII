@@ -103,5 +103,35 @@ public class ListaDupla {
         }
         System.out.print("]\n");
     }
+    public void DListSort() {
+        DListSort(primeiro, ultimo);
+    }
+    private void DListSort(CelulaDupla start, CelulaDupla end) {
+        if (start != null && end != null && start != end && start != end.prox) {
+            CelulaDupla pivot = partition(start, end);
+            DListSort(start, pivot.ant);
+            DListSort(pivot.prox, end);
+        }
+    }
+
+    private CelulaDupla partition(CelulaDupla start, CelulaDupla end) {
+        int pivotValue = end.elemento;
+        CelulaDupla i = start.ant;
+
+        for (CelulaDupla j = start; j != end; j = j.prox) {
+            if (j.elemento <= pivotValue) {
+                i = (i == null) ? start : i.prox;
+                int temp = i.elemento;
+                i.elemento = j.elemento;
+                j.elemento = temp;
+            }
+        }
+        i = (i == null) ? start : i.prox;
+        int temp = i.elemento;
+        i.elemento = end.elemento;
+        end.elemento = temp;
+        return i;
+    }
+    
 
 }

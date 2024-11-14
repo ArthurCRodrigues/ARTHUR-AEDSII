@@ -1,6 +1,7 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
+        "Sorting Algos/QuickSort",
         "LAB/SBC",
         "Data Structures/Tree/HibridTree",
         "Data Structures/Non-Flexible/Pilha",
@@ -9,6 +10,6 @@
         "Data Structures/Flexible/Matriz",
         "Data Structures/Flexible/ListaSimples",
         "Data Structures/Flexible/Fila",
-        "Sorting Algos/QuickSort"
+        "Data Structures/Flexible/ListaDupla"
     ]
 }

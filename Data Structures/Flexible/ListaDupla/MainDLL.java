@@ -1,4 +1,4 @@
-public class Main {
+public class MainDLL {
     public static void main(String[] args) {
         ListaDupla lista = new ListaDupla();
         for (int i = 1 ; i <= 5; i++) {
@@ -17,6 +17,9 @@ public class Main {
         lista.remover(2);
         lista.print();
         lista.invert();
+        lista.inserirFim(5);
+        lista.print();
+        lista.DListSort();
         lista.print();
     }
 }
