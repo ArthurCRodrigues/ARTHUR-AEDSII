@@ -90,7 +90,39 @@ public class Tree {
         }
         return rootP;
     }
+    public int getHeight() {
+        return getHeight(this.root,0);
+    }
+
+    private int getHeight(Node i, int H) {
+        if (i == null) H--;
+        else {
+            int alturaEsq = getHeight(i.left,H + 1);
+            int alturaDir = getHeight(i.right,H+1);
+            H = (alturaEsq > alturaDir) ? alturaEsq : alturaDir;
+        }
+        return H;
+    }
+    public int Nodes() {
+        return Nodes(root);
+    }
+    private int Nodes(Node i) {
+        if (i == null) return 0;
+        return 1 + Nodes(i.left) + Nodes(i.right);
+    }
     
+    public void displayPre() {
+        System.out.print("[ ");
+        displayPreHelper(root);
+        System.out.println("]");
+    }
+    private void displayPreHelper(Node rootP) {
+        if (rootP != null) {
+          System.out.print(rootP.element+" ");
+          displayHelper(rootP.left);
+          displayHelper(rootP.right);
+        } 
+      }  
     
 
 }

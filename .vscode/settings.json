@@ -9,7 +9,8 @@
         "Data Structures/Flexible/Pilha",
         "Data Structures/Flexible/Matriz",
         "Data Structures/Flexible/ListaSimples",
+        "Data Structures/Flexible/ListaDupla",
         "Data Structures/Flexible/Fila",
-        "Data Structures/Flexible/ListaDupla"
+        "Data Structures/Tree"
     ]
 }
