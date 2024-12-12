@@ -2,8 +2,10 @@
 
 public class Tree {
     public Node root;
+    int nodes;
     Tree() {
         this.root = null;
+        this.nodes = 0;
     }
     public void insert(int x) {
         Node node = new Node(x);
@@ -90,6 +92,7 @@ public class Tree {
         }
         return rootP;
     }
+<<<<<<< HEAD
     public int getHeight() {
         return getHeight(this.root,0);
     }
@@ -110,6 +113,47 @@ public class Tree {
         if (i == null) return 0;
         return 1 + Nodes(i.left) + Nodes(i.right);
     }
+=======
+
+    public int getHeight() {
+        return getHeight(root,0);
+    }
+
+    private int getHeight(Node i, int height) {
+        if (i == null) height--;
+        else {
+            int altleft = getHeight(i.left, height + 1);
+            int altright = getHeight(i.right, height+1);
+            height = (altleft > altright) ? altleft : altright;
+        }
+        return height;
+    }
+
+    public int countNodes() {
+        return countNodes(root);
+    }
+
+    private int countNodes(Node i) {
+        if (i != null) {
+            countNodes(i.left);
+            countNodes(i.right);
+            int altEsq = getHeight(i.left,0);
+            int altDir = getHeight(i.right,0);
+            
+            System.out.println("Element: "+ i.element);
+            System.out.println("altEsq: " + altEsq);
+            System.out.println("altDir: " + altDir);
+            int fator = Math.abs(altEsq-altDir) - nodes;
+            System.out.println("Fator: "+fator);
+            System.out.print("\n");
+            if (fator > 1) {
+                nodes++;
+            }
+        }
+        return nodes;
+    }
+
+>>>>>>> 3b3acb7ba0dc6b67eb7009c1a729072d60692b12
     
     public void displayPre() {
         System.out.print("[ ");
