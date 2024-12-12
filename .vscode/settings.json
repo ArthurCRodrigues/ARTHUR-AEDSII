@@ -4,12 +4,14 @@
         "Sorting Algos/QuickSort",
         "LAB/SBC",
         "Data Structures/Tree/HibridTree",
+        "Data Structures/Tree",
         "Data Structures/Non-Flexible/Pilha",
         "Data Structures/Non-Flexible/Fila",
         "Data Structures/Flexible/Pilha",
         "Data Structures/Flexible/Matriz",
         "Data Structures/Flexible/ListaSimples",
+        "Data Structures/Flexible/ListaDupla",
         "Data Structures/Flexible/Fila",
-        "Data Structures/Flexible/ListaDupla"
+        "pas/PA4/Q01"
     ]
 }
